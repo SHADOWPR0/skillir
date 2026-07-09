@@ -31,9 +31,6 @@ skillir = "skillir.cli:main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/skillir"]
 
-[tool.hatch.build]
-include = ["src/skillir/resources/**/*.json"]
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
