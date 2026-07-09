@@ -45,6 +45,17 @@ class SkillIrTests(unittest.TestCase):
     def test_cli_search(self) -> None:
         self.assertEqual(main(["search", "handling"]), 0)
 
+    def test_markdown_ingest_creates_reviewable_blocked_draft(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "manual.md"
+            source.write_text("# Procedure\n\n1. Move the item.\n", encoding="utf-8")
+            output = root / "draft"
+            self.assertEqual(main(["ingest", str(source), "--out", str(output)]), 0)
+            result = compile_skill(output / "skill.md")
+            self.assertTrue(result.blocked)
+            self.assertTrue((output / "source" / "document.md").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
