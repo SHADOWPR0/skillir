@@ -14,9 +14,10 @@ or documentation.
 ## Maturity claims
 
 Use only the defined labels: `reference`, `reviewed`, `robot_ir`,
-`sim_qualified`, `cell_qualified`, and `production_approved`. Do not claim a
-skill is universally safe, certified, or compatible with a target system unless
-the submitted evidence proves that precise configuration.
+`sim_qualified`, `hardware_observed`, `cell_qualified`, and
+`production_approved`. Do not claim a skill is universally safe, certified, or
+compatible with a target system unless the submitted evidence proves that
+precise configuration.
 
 ## Pack layout
 

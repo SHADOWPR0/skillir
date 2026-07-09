@@ -1,26 +1,289 @@
 {
-  "schema": "urn:skill-ir:v1alpha1",
+  "schema": "urn:skill-ir:catalog:v1alpha1",
   "skills": [
     {
       "id": "core.inventory-bin-sort",
       "title": "Inventory Bin Sort",
       "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.inventory-bin-sort.md",
+      "profiles": ["mobile-manipulator", "humanoid-bimanual"],
+      "verticals": ["logistics_warehousing"],
+      "groups": ["sorting_quality", "material_handling"],
+      "tags": ["bin", "inventory", "sort"]
+    },
+    {
+      "id": "core.object-inspection",
+      "title": "Object Inspection",
+      "maturity": "robot_ir",
       "risk_class": "low",
-      "profiles": ["mobile-manipulator", "humanoid-bimanual"]
+      "resource": "commons/core.object-inspection.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["inspection_quality", "manufacturing_assembly"],
+      "groups": ["perception_verification", "asset_inspection"],
+      "tags": ["inspect", "condition", "verify"]
+    },
+    {
+      "id": "core.pick-and-place",
+      "title": "Pick and Place",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.pick-and-place.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["manufacturing_assembly", "logistics_warehousing"],
+      "groups": ["material_handling"],
+      "tags": ["grasp", "transfer", "place"]
+    },
+    {
+      "id": "core.fixture-load",
+      "title": "Fixture Load",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.fixture-load.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["manufacturing_assembly"],
+      "groups": ["machine_tending", "material_handling"],
+      "tags": ["fixture", "load", "machine"]
+    },
+    {
+      "id": "core.fixture-unload",
+      "title": "Fixture Unload",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.fixture-unload.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["manufacturing_assembly"],
+      "groups": ["machine_tending", "material_handling"],
+      "tags": ["fixture", "unload", "machine"]
+    },
+    {
+      "id": "core.tote-transfer",
+      "title": "Tote Transfer",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.tote-transfer.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["logistics_warehousing"],
+      "groups": ["intralogistics", "material_handling"],
+      "tags": ["tote", "transport", "warehouse"]
+    },
+    {
+      "id": "core.shelf-replenishment",
+      "title": "Shelf Replenishment",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.shelf-replenishment.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["logistics_warehousing", "service_hospitality"],
+      "groups": ["intralogistics", "material_handling"],
+      "tags": ["shelf", "replenishment", "inventory"]
+    },
+    {
+      "id": "core.point-to-point-delivery",
+      "title": "Point-to-Point Delivery",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.point-to-point-delivery.md",
+      "profiles": ["mobile-load-carrier"],
+      "verticals": ["logistics_warehousing", "service_hospitality"],
+      "groups": ["intralogistics"],
+      "tags": ["delivery", "transport", "load"]
+    },
+    {
+      "id": "core.item-count-check",
+      "title": "Item Count Check",
+      "maturity": "robot_ir",
+      "risk_class": "low",
+      "resource": "commons/core.item-count-check.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["logistics_warehousing", "inspection_quality"],
+      "groups": ["perception_verification", "sorting_quality"],
+      "tags": ["count", "inventory", "audit"]
+    },
+    {
+      "id": "core.sort-and-quarantine",
+      "title": "Sort and Quarantine",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.sort-and-quarantine.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["inspection_quality", "logistics_warehousing"],
+      "groups": ["sorting_quality", "material_handling"],
+      "tags": ["reject", "quarantine", "quality"]
+    },
+    {
+      "id": "core.operator-confirmed-handoff",
+      "title": "Operator-Confirmed Handoff",
+      "maturity": "robot_ir",
+      "risk_class": "high",
+      "resource": "commons/core.operator-confirmed-handoff.md",
+      "profiles": ["humanoid-bimanual"],
+      "verticals": ["human_assistance", "service_hospitality"],
+      "groups": ["human_handoff"],
+      "tags": ["handoff", "confirmation", "human-aware"]
+    },
+    {
+      "id": "core.workspace-clearance-check",
+      "title": "Workspace Clearance Check",
+      "maturity": "robot_ir",
+      "risk_class": "low",
+      "resource": "commons/core.workspace-clearance-check.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["safety_recovery", "manufacturing_assembly"],
+      "groups": ["safety_preflight", "perception_verification"],
+      "tags": ["clearance", "preflight", "workspace"]
+    },
+    {
+      "id": "core.order-picking",
+      "title": "Order Picking",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.order-picking.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["logistics_warehousing"],
+      "groups": ["intralogistics", "material_handling"],
+      "tags": ["order", "pick", "fulfillment"]
+    },
+    {
+      "id": "core.tote-consolidation",
+      "title": "Tote Consolidation",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.tote-consolidation.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["logistics_warehousing"],
+      "groups": ["material_handling", "kitting_packaging"],
+      "tags": ["tote", "consolidation", "inventory"]
+    },
+    {
+      "id": "core.component-kitting",
+      "title": "Component Kitting",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.component-kitting.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["manufacturing_assembly", "logistics_warehousing"],
+      "groups": ["kitting_packaging", "material_handling"],
+      "tags": ["kit", "bom", "component"]
+    },
+    {
+      "id": "core.case-packing",
+      "title": "Case Packing",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.case-packing.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["logistics_warehousing", "manufacturing_assembly"],
+      "groups": ["kitting_packaging", "material_handling"],
+      "tags": ["case", "pack", "fulfillment"]
+    },
+    {
+      "id": "core.asset-condition-survey",
+      "title": "Asset Condition Survey",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.asset-condition-survey.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["maintenance_field_service", "inspection_quality"],
+      "groups": ["asset_inspection", "perception_verification"],
+      "tags": ["asset", "survey", "condition"]
+    },
+    {
+      "id": "core.indicator-read-and-record",
+      "title": "Indicator Read and Record",
+      "maturity": "robot_ir",
+      "risk_class": "low",
+      "resource": "commons/core.indicator-read-and-record.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["inspection_quality", "maintenance_field_service"],
+      "groups": ["asset_inspection", "perception_verification"],
+      "tags": ["gauge", "indicator", "reading"]
+    },
+    {
+      "id": "core.material-staging",
+      "title": "Material Staging",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.material-staging.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["construction_fabrication", "logistics_warehousing"],
+      "groups": ["material_handling", "intralogistics"],
+      "tags": ["construction", "material", "staging"]
+    },
+    {
+      "id": "core.produce-sort",
+      "title": "Produce Sort",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.produce-sort.md",
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["agriculture_food", "inspection_quality"],
+      "groups": ["sorting_quality", "material_handling"],
+      "tags": ["produce", "grade", "food-handling"]
+    },
+    {
+      "id": "core.tray-delivery",
+      "title": "Tray Delivery",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.tray-delivery.md",
+      "profiles": ["mobile-load-carrier"],
+      "verticals": ["service_hospitality"],
+      "groups": ["intralogistics"],
+      "tags": ["tray", "delivery", "service"]
+    },
+    {
+      "id": "core.surface-wipe",
+      "title": "Surface Wipe",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.surface-wipe.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["facilities_cleaning", "service_hospitality"],
+      "groups": ["cleaning_sanitation"],
+      "tags": ["wipe", "surface", "cleaning"]
+    },
+    {
+      "id": "core.waste-bin-service",
+      "title": "Waste Bin Service",
+      "maturity": "robot_ir",
+      "risk_class": "medium",
+      "resource": "commons/core.waste-bin-service.md",
+      "profiles": ["mobile-manipulator"],
+      "verticals": ["facilities_cleaning"],
+      "groups": ["cleaning_sanitation", "material_handling"],
+      "tags": ["waste", "bin", "facilities"]
+    },
+    {
+      "id": "core.tool-delivery",
+      "title": "Tool Delivery",
+      "maturity": "robot_ir",
+      "risk_class": "high",
+      "resource": "commons/core.tool-delivery.md",
+      "profiles": ["humanoid-bimanual"],
+      "verticals": ["maintenance_field_service", "human_assistance"],
+      "groups": ["tool_logistics", "human_handoff"],
+      "tags": ["tool", "delivery", "handoff"]
     },
     {
       "id": "reference.material-handling",
       "title": "Material Handling Coverage Pack",
       "maturity": "reference",
       "risk_class": "medium",
-      "profiles": ["mobile-load-carrier", "mobile-manipulator"]
+      "profiles": ["mobile-load-carrier", "mobile-manipulator"],
+      "verticals": ["logistics_warehousing"],
+      "groups": ["material_handling", "intralogistics"],
+      "tags": ["coverage", "material", "warehouse"]
     },
     {
       "id": "reference.welding-preparation",
       "title": "Fabrication Preparation Coverage Pack",
       "maturity": "reference",
       "risk_class": "high",
-      "profiles": ["fixed-manipulator"]
+      "profiles": ["fixed-manipulator"],
+      "verticals": ["construction_fabrication", "manufacturing_assembly"],
+      "groups": ["safety_preflight", "material_handling"],
+      "tags": ["coverage", "fabrication", "preparation"]
     }
   ]
 }

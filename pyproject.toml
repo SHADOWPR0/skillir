@@ -21,15 +21,40 @@ classifiers = [
 
 [project.optional-dependencies]
 pdf = ["docling>=2.0,<3"]
-ocr = ["ocrmypdf>=17.0,<18", "pypdfium2>=4,<5"]
 draft = ["httpx>=0.28,<1"]
-dev = ["pytest>=8,<9"]
+dev = ["pytest>=8,<9", "build>=1,<2", "jsonschema>=4,<5"]
 
 [project.scripts]
 skillir = "skillir.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/skillir"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"packs/household-service/skills/inventory-bin-sort/skill.md" = "skillir/commons/core.inventory-bin-sort.md"
+"packs/foundational/skills/object-inspection/skill.md" = "skillir/commons/core.object-inspection.md"
+"packs/foundational/skills/pick-and-place/skill.md" = "skillir/commons/core.pick-and-place.md"
+"packs/foundational/skills/fixture-load/skill.md" = "skillir/commons/core.fixture-load.md"
+"packs/foundational/skills/fixture-unload/skill.md" = "skillir/commons/core.fixture-unload.md"
+"packs/foundational/skills/tote-transfer/skill.md" = "skillir/commons/core.tote-transfer.md"
+"packs/foundational/skills/shelf-replenishment/skill.md" = "skillir/commons/core.shelf-replenishment.md"
+"packs/foundational/skills/point-to-point-delivery/skill.md" = "skillir/commons/core.point-to-point-delivery.md"
+"packs/foundational/skills/item-count-check/skill.md" = "skillir/commons/core.item-count-check.md"
+"packs/foundational/skills/sort-and-quarantine/skill.md" = "skillir/commons/core.sort-and-quarantine.md"
+"packs/foundational/skills/operator-confirmed-handoff/skill.md" = "skillir/commons/core.operator-confirmed-handoff.md"
+"packs/foundational/skills/workspace-clearance-check/skill.md" = "skillir/commons/core.workspace-clearance-check.md"
+"packs/foundational/skills/order-picking/skill.md" = "skillir/commons/core.order-picking.md"
+"packs/foundational/skills/tote-consolidation/skill.md" = "skillir/commons/core.tote-consolidation.md"
+"packs/manufacturing/skills/component-kitting/skill.md" = "skillir/commons/core.component-kitting.md"
+"packs/logistics/skills/case-packing/skill.md" = "skillir/commons/core.case-packing.md"
+"packs/maintenance/skills/asset-condition-survey/skill.md" = "skillir/commons/core.asset-condition-survey.md"
+"packs/inspection/skills/indicator-read-and-record/skill.md" = "skillir/commons/core.indicator-read-and-record.md"
+"packs/construction/skills/material-staging/skill.md" = "skillir/commons/core.material-staging.md"
+"packs/agriculture-food/skills/produce-sort/skill.md" = "skillir/commons/core.produce-sort.md"
+"packs/service/skills/tray-delivery/skill.md" = "skillir/commons/core.tray-delivery.md"
+"packs/facilities/skills/surface-wipe/skill.md" = "skillir/commons/core.surface-wipe.md"
+"packs/facilities/skills/waste-bin-service/skill.md" = "skillir/commons/core.waste-bin-service.md"
+"packs/maintenance/skills/tool-delivery/skill.md" = "skillir/commons/core.tool-delivery.md"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m pip install --upgrade pip hatchling
-      - run: python -m pip install -e .
+      - run: python -m pip install -e '.[dev]'
       - run: python -m unittest discover -s tests
       - run: python scripts/check_neutrality.py
 
@@ -34,8 +34,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: python -m pip install --upgrade pip hatchling
+      - run: python -m pip install --upgrade pip hatchling build
       - run: python -m pip install -e .
+      - run: python -m build
+      - run: python scripts/check_wheel.py
+      - run: skillir pull core.component-kitting --out /tmp/component-kitting
+      - run: skillir compile /tmp/component-kitting
       - run: skillir compile packs/household-service/skills/inventory-bin-sort
       - run: skillir simulate packs/household-service/skills/inventory-bin-sort
       - run: skillir pack packs/household-service/skills/inventory-bin-sort

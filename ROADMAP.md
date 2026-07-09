@@ -207,14 +207,16 @@ Plugin contracts will include `RecorderAdapter`, `DatasetExporter`,
 
 ### v0.2 — Skill Commons and document intelligence
 
-- expand the catalog from starter examples into composable foundational skills
-- publish catalog schema, maturity states, provenance, and contribution tests
-- pinned offline PDF/OCR extraction with page, table, diagram, and warning
+- [x] expand the catalog from starter examples into composable foundational skills
+- [x] publish catalog schema, maturity states, provenance, and contribution tests
+- [x] bundle complete commons sources and expose CLI search, show, pull, and taxonomy
+- [x] publish a concrete adapter manifest schema and conformance contract
+- [ ] pinned offline PDF/OCR extraction with page, table, diagram, and warning
   provenance
-- interactive review and explicit uncertainty resolution
-- source-change impact analysis and versioned private overlays
-- demonstration-plan and `TrainingSpec` generation
-- first complete reference skill: inventory bin sorting
+- [ ] interactive review and explicit uncertainty resolution
+- [ ] source-change impact analysis and versioned private overlays
+- [ ] demonstration-plan and `TrainingSpec` generation
+- [ ] first complete reference skill: inventory bin sorting
 
 ### v0.3 — Training Bridge
 

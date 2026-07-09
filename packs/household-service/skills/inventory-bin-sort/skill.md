@@ -3,7 +3,7 @@ id: core.inventory-bin-sort
 version: 0.1.0
 title: Inventory Bin Sort
 license: Apache-2.0
-risk_class: low
+risk_class: medium
 maturity: robot_ir
 profile: mobile-manipulator
 required_capabilities:

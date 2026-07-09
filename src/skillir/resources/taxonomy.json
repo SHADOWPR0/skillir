@@ -1,0 +1,28 @@
+{
+  "schema": "urn:skill-ir:taxonomy:v1alpha1",
+  "verticals": {
+    "agriculture_food": {"title": "Agriculture and Food Handling"},
+    "construction_fabrication": {"title": "Construction and Fabrication"},
+    "facilities_cleaning": {"title": "Facilities and Cleaning"},
+    "human_assistance": {"title": "Human Assistance"},
+    "inspection_quality": {"title": "Inspection and Quality"},
+    "logistics_warehousing": {"title": "Logistics and Warehousing"},
+    "maintenance_field_service": {"title": "Maintenance and Field Service"},
+    "manufacturing_assembly": {"title": "Manufacturing and Assembly"},
+    "safety_recovery": {"title": "Safety and Recovery"},
+    "service_hospitality": {"title": "Service and Hospitality"}
+  },
+  "groups": {
+    "asset_inspection": {"title": "Asset Inspection"},
+    "cleaning_sanitation": {"title": "Cleaning and Sanitation"},
+    "human_handoff": {"title": "Human Handoff"},
+    "intralogistics": {"title": "Intralogistics"},
+    "kitting_packaging": {"title": "Kitting and Packaging"},
+    "machine_tending": {"title": "Machine Tending"},
+    "material_handling": {"title": "Material Handling"},
+    "perception_verification": {"title": "Perception and Verification"},
+    "safety_preflight": {"title": "Safety and Preflight"},
+    "sorting_quality": {"title": "Sorting and Quality"},
+    "tool_logistics": {"title": "Tool Logistics"}
+  }
+}

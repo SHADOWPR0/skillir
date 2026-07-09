@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skill-ir:catalog:v1alpha1",
+  "title": "Skill IR Catalog",
+  "type": "object",
+  "required": ["schema", "skills"],
+  "properties": {
+    "schema": {"const": "urn:skill-ir:catalog:v1alpha1"},
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "maturity", "risk_class", "profiles", "verticals", "groups"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)+$"},
+          "title": {"type": "string", "minLength": 3},
+          "maturity": {"enum": ["reference", "reviewed", "robot_ir", "sim_qualified", "hardware_observed", "cell_qualified", "production_approved"]},
+          "risk_class": {"enum": ["low", "medium", "high", "critical"]},
+          "resource": {"type": "string", "pattern": "^commons/[a-z0-9._-]+\\.md$"},
+          "profiles": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "verticals": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "groups": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "tags": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

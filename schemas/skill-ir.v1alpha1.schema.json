@@ -7,7 +7,69 @@
   "properties": {
     "schema": {"const": "urn:skill-ir:v1alpha1"},
     "kind": {"const": "Skill"},
-    "metadata": {"type": "object", "required": ["id", "version", "title", "license"]},
-    "spec": {"type": "object", "required": ["risk_class", "maturity", "robot_profile", "steps", "success_criteria"]}
-  }
+    "metadata": {
+      "type": "object",
+      "required": ["id", "version", "title", "license", "source_refs"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)+$"},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"},
+        "title": {"type": "string", "minLength": 3},
+        "license": {"type": "string", "minLength": 1},
+        "source_refs": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+      },
+      "additionalProperties": false
+    },
+    "spec": {
+      "type": "object",
+      "required": ["risk_class", "maturity", "robot_profile", "required_capabilities", "preconditions", "safe_state", "success_criteria", "steps"],
+      "properties": {
+        "risk_class": {"enum": ["low", "medium", "high", "critical"]},
+        "maturity": {"enum": ["reference", "reviewed", "robot_ir", "sim_qualified", "hardware_observed", "cell_qualified", "production_approved"]},
+        "robot_profile": {"type": "string", "minLength": 1},
+        "required_capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "preconditions": {"type": "string"},
+        "safe_state": {"type": "string"},
+        "success_criteria": {"type": "string", "minLength": 1},
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "instruction", "action", "observe", "verify", "on_failure", "evidence_refs"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^step-[0-9]{2,}$"},
+              "instruction": {"type": "string", "minLength": 1},
+              "action": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*(?:\\.[a-z][a-z0-9_-]*)+$"},
+              "observe": {"type": "string"},
+              "verify": {"type": "string"},
+              "on_failure": {"type": "string", "minLength": 1},
+              "evidence_refs": {"type": "array", "items": {"type": "string"}}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "spec": {
+            "properties": {"risk_class": {"enum": ["high", "critical"]}},
+            "required": ["risk_class"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "properties": {"safe_state": {"type": "string", "minLength": 1}}
+          }
+        }
+      }
+    }
+  ]
 }

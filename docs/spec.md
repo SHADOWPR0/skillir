@@ -11,7 +11,7 @@ version: 0.1.0
 title: Human-readable title
 license: Apache-2.0
 risk_class: low | medium | high | critical
-maturity: reference | reviewed | robot_ir | sim_qualified | cell_qualified | production_approved
+maturity: reference | reviewed | robot_ir | sim_qualified | hardware_observed | cell_qualified | production_approved
 profile: humanoid-bimanual
 ```
 

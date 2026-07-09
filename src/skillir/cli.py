@@ -6,10 +6,12 @@ import argparse
 import json
 import shutil
 import sys
+from importlib import resources
 from pathlib import Path
 
 from . import __version__
 from .core import attest, build, bundle, compile_skill, local_publish, profiles, simulate, verify
+from .frontmatter import load
 
 EXIT_BLOCKED = 31
 EXIT_DEPENDENCY = 20
@@ -227,15 +229,74 @@ def cmd_inspect(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_search(args: argparse.Namespace) -> int:
-    from importlib import resources
-
+def _catalog_entries() -> list[dict[str, object]]:
     catalog = json.loads(resources.files("skillir").joinpath("resources", "catalog.json").read_text(encoding="utf-8"))
+    return list(catalog["skills"])
+
+
+def cmd_taxonomy(_: argparse.Namespace) -> int:
+    taxonomy = json.loads(resources.files("skillir").joinpath("resources", "taxonomy.json").read_text(encoding="utf-8"))
+    print("VERTICALS")
+    for identifier, item in taxonomy["verticals"].items():
+        print(f"{identifier}\t{item['title']}")
+    print("\nSKILL GROUPS")
+    for identifier, item in taxonomy["groups"].items():
+        print(f"{identifier}\t{item['title']}")
+    return 0
+
+
+def _catalog_skill(skill_id: str) -> tuple[dict[str, object] | None, str]:
+    entry = next((item for item in _catalog_entries() if item.get("id") == skill_id), None)
+    if entry is None:
+        return None, f"Unknown catalog skill: {skill_id}. Run `skillir search <query>` first."
+    resource_path = entry.get("resource")
+    if not isinstance(resource_path, str):
+        return None, f"{skill_id} is a coverage reference, not an installable skill."
+    packaged = resources.files("skillir").joinpath(*resource_path.split("/"))
+    if packaged.is_file():
+        return entry, packaged.read_text(encoding="utf-8")
+    repository = Path(__file__).resolve().parents[2]
+    matches = []
+    for candidate in repository.glob("packs/**/skill.md"):
+        metadata, _ = load(candidate)
+        if metadata.get("id") == skill_id:
+            matches.append(candidate)
+    if len(matches) == 1:
+        return entry, matches[0].read_text(encoding="utf-8")
+    return None, f"Bundled source for {skill_id} is unavailable; reinstall Skill IR from a complete wheel."
+
+
+def cmd_search(args: argparse.Namespace) -> int:
     query = args.query.lower()
-    hits = [entry for entry in catalog["skills"] if query in json.dumps(entry).lower()]
+    hits = [entry for entry in _catalog_entries() if query in json.dumps(entry).lower()]
     for hit in hits:
         print(f"{hit['id']}\t{hit['title']}\t{hit['maturity']}\t{hit['risk_class']}")
     return 0 if hits else 1
+
+
+def cmd_show(args: argparse.Namespace) -> int:
+    entry, content = _catalog_skill(args.skill_id)
+    if entry is None:
+        print(content, file=sys.stderr)
+        return 1
+    sys.stdout.write(content)
+    return 0
+
+
+def cmd_pull(args: argparse.Namespace) -> int:
+    entry, content = _catalog_skill(args.skill_id)
+    if entry is None:
+        print(content, file=sys.stderr)
+        return 1
+    root = Path(args.out or args.skill_id.replace(".", "-")).expanduser().resolve()
+    target = root if root.suffix.lower() == ".md" else root / "skill.md"
+    if target.exists() and not args.force:
+        print(f"Refusing to overwrite {target}; pass --force to replace it.", file=sys.stderr)
+        return 1
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(content, encoding="utf-8")
+    print(target)
+    return 0
 
 
 def cmd_profiles(_: argparse.Namespace) -> int:
@@ -293,9 +354,19 @@ def build_parser() -> argparse.ArgumentParser:
     verify_cmd = sub.add_parser("verify", help="Verify a local digest attestation.")
     verify_cmd.add_argument("bundle")
     verify_cmd.set_defaults(func=cmd_verify)
-    search = sub.add_parser("search", help="Search the bundled starter catalog.")
+    search = sub.add_parser("search", help="Search the bundled skill commons.")
     search.add_argument("query")
     search.set_defaults(func=cmd_search)
+    show = sub.add_parser("show", help="Print a bundled commons skill as Markdown.")
+    show.add_argument("skill_id")
+    show.set_defaults(func=cmd_show)
+    pull = sub.add_parser("pull", help="Copy a bundled commons skill into an editable workspace.")
+    pull.add_argument("skill_id")
+    pull.add_argument("--out")
+    pull.add_argument("--force", action="store_true")
+    pull.set_defaults(func=cmd_pull)
+    taxonomy = sub.add_parser("taxonomy", help="List supported verticals and skill groups.")
+    taxonomy.set_defaults(func=cmd_taxonomy)
     profile_cmd = sub.add_parser("profiles", help="List neutral robot capability profiles.")
     profile_cmd.set_defaults(func=cmd_profiles)
     doctor = sub.add_parser("doctor", help="Check optional runtime capabilities.")

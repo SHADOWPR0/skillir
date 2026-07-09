@@ -1,0 +1,22 @@
+{
+  "schema": "urn:skill-ir:adapter-manifest:v1alpha1",
+  "kind": "AdapterManifest",
+  "metadata": {
+    "id": "example.workcell-adapter",
+    "version": "0.1.0",
+    "license": "Apache-2.0"
+  },
+  "spec": {
+    "skill_ir_versions": ["urn:skill-ir:v1alpha1"],
+    "transport": "json-rpc",
+    "profiles": ["fixed-manipulator"],
+    "primitives": ["perceive.inspect", "manip.pick", "manip.place", "safety.stop"],
+    "operations": ["validate", "compile", "simulate"],
+    "permissions": {
+      "network": false,
+      "filesystem": "workspace-only",
+      "hardware": false
+    },
+    "deployment_enabled": false
+  }
+}

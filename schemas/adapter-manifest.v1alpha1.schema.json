@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skill-ir:adapter-manifest:v1alpha1",
+  "title": "Skill IR Adapter Manifest",
+  "type": "object",
+  "required": ["schema", "kind", "metadata", "spec"],
+  "properties": {
+    "schema": {"const": "urn:skill-ir:adapter-manifest:v1alpha1"},
+    "kind": {"const": "AdapterManifest"},
+    "metadata": {
+      "type": "object",
+      "required": ["id", "version", "license"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)+$"},
+        "version": {"type": "string", "minLength": 1},
+        "license": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "spec": {
+      "type": "object",
+      "required": ["skill_ir_versions", "transport", "profiles", "primitives", "operations", "permissions", "deployment_enabled"],
+      "properties": {
+        "skill_ir_versions": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "transport": {"enum": ["python-entry-point", "json-rpc"]},
+        "profiles": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "primitives": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "operations": {
+          "type": "array",
+          "items": {"enum": ["validate", "compile", "simulate", "deploy"]},
+          "minItems": 3,
+          "uniqueItems": true,
+          "allOf": [
+            {"contains": {"const": "validate"}},
+            {"contains": {"const": "compile"}},
+            {"contains": {"const": "simulate"}}
+          ]
+        },
+        "permissions": {
+          "type": "object",
+          "required": ["network", "filesystem", "hardware"],
+          "properties": {
+            "network": {"type": "boolean"},
+            "filesystem": {"enum": ["none", "workspace-only", "declared-paths"]},
+            "hardware": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        },
+        "deployment_enabled": {"type": "boolean"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"deployment_enabled": {"const": true}}},
+          "then": {
+            "properties": {
+              "operations": {"contains": {"const": "deploy"}},
+              "permissions": {"properties": {"hardware": {"const": true}}}
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
