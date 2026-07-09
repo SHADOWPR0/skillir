@@ -1,0 +1,18 @@
+{
+  "humanoid-bimanual": {
+    "title": "Generic Bimanual Humanoid",
+    "capabilities": ["perception.object", "manipulation.pick", "manipulation.place", "mobility.navigate", "interaction.confirm", "safety.stop"]
+  },
+  "mobile-load-carrier": {
+    "title": "Generic Mobile Load Carrier",
+    "capabilities": ["perception.object", "mobility.navigate", "safety.stop"]
+  },
+  "fixed-manipulator": {
+    "title": "Generic Fixed Manipulator",
+    "capabilities": ["perception.object", "manipulation.pick", "manipulation.place", "safety.stop"]
+  },
+  "mobile-manipulator": {
+    "title": "Generic Mobile Manipulator",
+    "capabilities": ["perception.object", "manipulation.pick", "manipulation.place", "mobility.navigate", "interaction.confirm", "safety.stop"]
+  }
+}

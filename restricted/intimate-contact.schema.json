@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Restricted Human-Contact Extension",
+  "type": "object",
+  "required": ["adult_access", "consent_state", "independent_stop", "privacy_mode"],
+  "properties": {
+    "adult_access": {"const": "verified"},
+    "consent_state": {"enum": ["specific-current-revocable"]},
+    "independent_stop": {"type": "boolean", "const": true},
+    "privacy_mode": {"enum": ["no-recording-default"]}
+  }
+}

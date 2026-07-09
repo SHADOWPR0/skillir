@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+title: Skill IR
+message: If you use Skill IR, please cite the repository and release version.
+type: software
+authors:
+  - name: Skill IR Contributors
+license: Apache-2.0

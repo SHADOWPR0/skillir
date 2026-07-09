@@ -1,0 +1,26 @@
+{
+  "schema": "urn:skill-ir:v1alpha1",
+  "skills": [
+    {
+      "id": "core.inventory-bin-sort",
+      "title": "Inventory Bin Sort",
+      "maturity": "robot_ir",
+      "risk_class": "low",
+      "profiles": ["mobile-manipulator", "humanoid-bimanual"]
+    },
+    {
+      "id": "reference.material-handling",
+      "title": "Material Handling Coverage Pack",
+      "maturity": "reference",
+      "risk_class": "medium",
+      "profiles": ["mobile-load-carrier", "mobile-manipulator"]
+    },
+    {
+      "id": "reference.welding-preparation",
+      "title": "Fabrication Preparation Coverage Pack",
+      "maturity": "reference",
+      "risk_class": "high",
+      "profiles": ["fixed-manipulator"]
+    }
+  ]
+}

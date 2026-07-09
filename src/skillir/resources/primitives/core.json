@@ -1,0 +1,10 @@
+{
+  "perceive.inspect": {"requires": ["perception.object"], "safety_class": "low"},
+  "manip.pick": {"requires": ["manipulation.pick"], "safety_class": "medium"},
+  "manip.place": {"requires": ["manipulation.place"], "safety_class": "medium"},
+  "nav.goto": {"requires": ["mobility.navigate"], "safety_class": "medium"},
+  "verify.match": {"requires": ["perception.object"], "safety_class": "low"},
+  "interact.ask_confirm": {"requires": ["interaction.confirm"], "safety_class": "low"},
+  "safety.stop": {"requires": ["safety.stop"], "safety_class": "critical"},
+  "tool.handoff": {"requires": ["manipulation.place", "interaction.confirm"], "safety_class": "high"}
+}

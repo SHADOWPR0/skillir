@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skill-ir:v1alpha1",
+  "title": "Skill IR",
+  "type": "object",
+  "required": ["schema", "kind", "metadata", "spec"],
+  "properties": {
+    "schema": {"const": "urn:skill-ir:v1alpha1"},
+    "kind": {"const": "Skill"},
+    "metadata": {"type": "object", "required": ["id", "version", "title", "license"]},
+    "spec": {"type": "object", "required": ["risk_class", "maturity", "robot_profile", "steps", "success_criteria"]}
+  }
+}
